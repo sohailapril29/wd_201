@@ -19,6 +19,7 @@
     "supertest": "^6.3.3"
   },
   "scripts": {
+    "start:prod": "node index.js",
     "start": "nodemon -e js,ejs",
     "db:create:test": "NODE_ENV=test npx sequelize-cli db:create",
     "prepare": "husky install",
