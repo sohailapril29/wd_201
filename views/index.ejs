@@ -4,10 +4,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/css/styles.css" />
-  <script defer src="/js/script.js" type="text/javascript"></script>
   <title>Todo Manager</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="/js/script.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script>
+    function updateTodo(id) {
+      fetch(`/todos/${id}/markAsCompleted`, {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => {
+          if (res.ok) {
+            window.location.reload();
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+
+    function deleteTodo(id) {
+      fetch(`/todos/${id}`, {
+        method: "delete",
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        if(res.ok) {
+          window.location.reload();
+        }
+      })
+      .catch((err) => console.error(err));
+    }
+  </script>
 </head>
 
 <body>
@@ -17,11 +44,12 @@
       <form action="/todos" method="post">
         <div class="flex gap-2 py-4">
           <div class="flex-auto">
-            <input type="text" name= "title" placeholder="whats next?"
+            <input type="text" name="title" placeholder="whats next?"
               class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm" required>
           </div>
           <div class="flex-auto">
-            <input type="date" name= "dueDate" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4" />
+            <input type="date" name="dueDate"
+              class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4" />
           </div>
           <div class="flex-none">
             <button type="submit" class="bg-green-600 text-white px-5 py-1.5 rounded font-medium mr-2 mb-2">Add

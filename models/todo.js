@@ -10,15 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
     static addTodo({ title, dueDate }) {
       return this.create({ title: title, dueDate: dueDate, completed: false });
     }
 
     markAsCompleted() {
       return this.update({ completed: true });
-    }
-    static getTodos() {
-      return this.findAll();
     }
   }
   Todo.init(
